@@ -1,2 +1,2 @@
-# Auzre-automation
+# Azure-automation
 Azure infrastructre automation
