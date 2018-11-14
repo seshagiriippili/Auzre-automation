@@ -1,0 +1,12 @@
+---
+# vars file for ansible-controller
+#default_location: australiaeast
+resource_group_name: npdac-mgmt-rg
+vnet_name: npdac-mgmt-vnet
+subnet_name: npdac-mgmt-subnet
+nsg_name: npdac-mgmt-nsg
+admin_user: azureuser
+vm_name: Ansible-controller 
+my_nic: AnsibleNIC 
+public_ip_name: AsniblePublicIP
+
