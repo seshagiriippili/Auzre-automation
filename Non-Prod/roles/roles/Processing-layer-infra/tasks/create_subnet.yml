@@ -1,0 +1,13 @@
+---
+ - name: Create a Subnets
+   azure_rm_subnet:
+     resource_group: "{{ resource_group_name }}" 
+     name: "{{ subnet_master }}"
+     address_prefix: "{{ master_cidr }}"
+     virtual_network: "{{ vnet_name }}"
+ - name: Create a Subnets for hdp edge
+   azure_rm_subnet:
+     resource_group: "{{ resource_group_name }}" 
+     name: "{{ subnet_edge }}"
+     address_prefix: "{{ edge_cidr }}"
+     virtual_network: "{{ vnet_name }}"

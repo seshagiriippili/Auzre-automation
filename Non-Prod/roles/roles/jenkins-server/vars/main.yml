@@ -1,0 +1,12 @@
+---
+# vars file for ansible-jenkins server
+#default_location: australiaeast
+resource_group_name: npdac-mgmt-rg
+vnet_name: npdac-mgmt-vnet
+subnet_name: npdac-mgmt-subnet
+nsg_name: npdac-mgmt-nsg
+admin_user: azureuser
+vm_name: jenkins-server 
+my_nic: JenkinNIC
+public_ip_name: JenkinPublicIP
+

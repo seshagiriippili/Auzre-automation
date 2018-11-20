@@ -1,0 +1,7 @@
+---
+# tasks file for ansible-jenkins
+- include: create_virtual_machine.yml
+  tags: create
+# JOEC: this will be moved to github and run by docker
+# - include: ansible_pre_reqs.yml
+# - include: ansible_pkgs.yml
