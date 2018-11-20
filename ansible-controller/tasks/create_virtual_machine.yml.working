@@ -86,15 +86,34 @@
      [ -d /root/.azure ] || mkdir /root/.azure
      mv -f /tmp/foo /root/.azure/credentials
 
- - name: Install Ansible packages
-   delegate_to: "{{ sshname }}"
-   become: yes
-   yum: name={{ item }} state=present
-   with_items:
-    - gcc
-    - libffi-devel
-    - python-devel
-    - openssl-devel
+# - name: Install Ansible packages
+#   delegate_to: "{{ sshname }}"
+#   become: yes
+#   yum: 
+#     name: ['gcc', 'libffi-devel', 'python-devel', 'openssl-devel'] 
+#     state: present
+
+# - name: Setup the epel-release 
+#   delegate_to: "{{ sshname }}"
+#   become: yes
+#   shell: |
+#     [ 'yum install -y epel-release',  'yum install -y python-pip',  'yum install -y python-wheel' ] 
+
+# - name: Install Ansible packages
+#   delegate_to: "{{ sshname }}"
+#   become: yes
+#   yum: 
+#     name: ['python-pip', 'python-wheel'] 
+ #    state: present
+#  - name: Install Ansible packages
+# #   delegate_to: "{{ sshname }}"
+#    become: yes
+#    yum: name={{ item }} state=present
+#    with_items:
+#     - gcc
+#     - libffi-devel
+#     - python-devel
+#     - openssl-devel
  
  - name: Install Ansible packages
    delegate_to: "{{ sshname }}"
@@ -108,12 +127,29 @@
    become: yes
    yum: name={{ item }} state=present
    with_items:
+    - ansible
     - python-pip
-    - python-wheel
+#    - python-wheel
+ - name: uninstall python package
+   delegate_to: "{{ sshname }}"
+   become: yes
+   pip: 
+      name: cryptography
+      state: absent
+#    - python-wheel
  - name: install Asnible Azure pkgs
    delegate_to: "{{ sshname }}"
    become: yes
    pip: 
-      name: ansible[azure]
+      name: "{{item}}"
       state: present
+   with_items:
+      - pyopenssl
+      - "ansible[azure]"
+
+ - name: Fixing the ansible issue with latest ansible 
+   delegate_to: "{{ sshname }}"
+   become: yes
+   shell: |
+      perl -pi -e 's/#gather_subset = all/gather_subset = !all/' /etc/ansible/ansible.cfg
 
