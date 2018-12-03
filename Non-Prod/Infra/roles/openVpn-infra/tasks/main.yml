@@ -1,0 +1,4 @@
+---
+# tasks file for ansible-controller
+ - include: create_subnet.yml
+ - include: create_virtual_machine.yml

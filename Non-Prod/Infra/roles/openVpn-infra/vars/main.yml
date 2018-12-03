@@ -1,0 +1,14 @@
+---
+# vars file for ansible-controller
+#default_location: australiaeast
+resource_group_name: npdac-mgmt-rg
+vnet_name: npdac-mgmt-vnet
+subnet_name: npdac-mgmt-vpn-subnet
+nsg_name: npdac-mgmt-vpn-nsg
+admin_user: azureuser
+vm_name: OpenVpnVM 
+vm_size: Standard_B2ms 
+my_nic: OpenVpnNIC
+public_ip_name: OpenVpnPublicIP
+subnet_cidr: "10.80.2.248/29"
+

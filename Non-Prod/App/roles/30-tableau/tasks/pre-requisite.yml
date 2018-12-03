@@ -1,0 +1,61 @@
+---
+- name: creating a new user
+  become: yes
+  template:
+    src: useradding.sh.j2
+    dest: /tmp/useradding.sh
+    owner: root
+    group: root
+    mode: '0755'
+- name: create a new user
+  become: yes
+  command: './useradding.sh "{{ tsmadmin }}" "{{ tsmpasswd }}"'
+  args:
+    chdir: /tmp
+    
+#- name: Mount /dev/sdb1 to /opt and create user
+#  become: yes
+#  shell: |
+#    mount /dev/sdb1 /var/opt
+
+- name: Set Hostname with hostname command
+  become: yes
+  hostname:
+    name: "{{ hostname }}"
+  notify:
+    - restart hostname
+    - restart systemd-logind
+
+- name: Re-gather facts
+  action: setup
+  when: ansible_hostname != fqdn
+
+- name: Build hosts file (backups will be made)
+  become: yes
+  lineinfile:
+    dest: /etc/hosts
+    regexp: "^{{ ansible_default_ipv4.address }}"
+    line: "{{ ansible_default_ipv4.address }} {{ fqdn }} {{ hostname }}"
+    state: present
+    backup: yes
+  when: ansible_default_ipv4.address is defined
+  become: yes
+  notify:
+    - restart hostname
+    - restart systemd-logind
+
+
+#- name: Check that you can connect (GET) to a Azure Blob and download pkg
+#  become: true
+#  uri:
+#    url: "{{ item }}"
+#    dest: /tmp
+#  with_items:
+#    - "{{ tabl_server_pkg }}"
+#    - "{{ auto_installer }}"
+#- name: Check that you can connect (GET) to a Azure Blob and download pkg
+#  become: true
+#  uri:
+#    url: "{{ tabl_server_pkg }}" 
+#    dest: /tmp
+

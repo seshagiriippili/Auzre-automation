@@ -1,0 +1,60 @@
+---
+- name: Make sure we have a 'wheel' group
+  group:
+    name: wheel
+    state: present
+
+- name: Allow 'wheel' group to have passwordless sudo
+  become: yes
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+- name: Add sudoers users to tsmadmin  group
+  become: yes
+  user: 
+    name: "{{ tsmadmin }}"
+    groups: wheel
+#    groups: wheel, tsmadmin, tableau
+    password: "{{ tsmpasswd }}"
+    shell: /bin/bash
+#    groups: tsmadmin
+#    append: yes 
+    state: present 
+#    createhome: yes
+
+#- name: add user tbladmin
+#  user:
+#    name: "{{ tsmadmin }}" 
+#    state: present
+#    createhome: yes
+#  become: yes
+#  become_method: "sudo" 
+
+
+- name: Mount /dev/sdb1 to /opt
+  become: yes
+  shell: |
+    mount /dev/sdb1 /var/opt
+#    echo "{{tsmadmin}} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+    
+
+
+#- name: Check that you can connect (GET) to a Azure Blob and download pkg
+#  become_user:  "{{ tsmadmin }}"
+#  become: true
+#  uri:
+#    url: https://npdacapplicationpackages.blob.core.windows.net/sampleapp/tableau-server-automated-installer-2018-3.noarch.rpm
+#    url: "{{ tabl_server_pkg }}" 
+#    dest: /tmp
+
+#- name: Download the file
+#  azure_rm_storageblob:
+#    resource_group: "{{ resource_group_name }}" 
+#    storage_account_name: "{{ repo }}"
+#    container: "{{ container }}"
+#    blob: "{{ installer_pkg }}"
+#    dest: '~/tmp/"{{ installer_pkg }}"'

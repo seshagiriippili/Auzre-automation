@@ -1,0 +1,43 @@
+---
+
+- name: Set Hostname with hostname command
+  become: yes
+  hostname:
+    name: "{{ hostname }}"
+  notify:
+    - restart hostname
+    - restart systemd-logind
+
+- name: Re-gather facts
+  action: setup
+  when: ansible_hostname != fqdn
+
+- name: Build hosts file (backups will be made)
+  become: yes
+  lineinfile:
+    dest: /etc/hosts
+    regexp: "^{{ ansible_default_ipv4.address }}"
+    line: "{{ ansible_default_ipv4.address }} {{ fqdn }} {{ hostname }}"
+    state: present
+    backup: yes
+  when: ansible_default_ipv4.address is defined
+  become: yes
+  notify:
+    - restart hostname
+    - restart systemd-logind
+
+
+
+- name: copy the installation script to target
+  template:
+   src: install_openvpn.sh.j2
+   dest: /tmp/install_openvpn.sh
+#   owner: root
+#   group: root
+   mode: 0777
+
+- name: run the installer
+  become: yes
+  command: './install_openvpn.sh  "{{ vpnpassword }}"'
+  args:
+    chdir: /tmp

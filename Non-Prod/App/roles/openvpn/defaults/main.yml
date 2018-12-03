@@ -1,0 +1,6 @@
+---
+# defaults file for openvpn
+
+hostname: "{{ ansible_hostname }}"
+fqdn: '{{ ansible_hostname }}.dac.nsw.gov.au'
+

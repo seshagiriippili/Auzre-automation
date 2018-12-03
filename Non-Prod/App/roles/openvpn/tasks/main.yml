@@ -1,0 +1,3 @@
+---
+# tasks file for openvpn
+ - include: install.yml
