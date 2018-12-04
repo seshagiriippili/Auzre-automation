@@ -14,8 +14,8 @@ if [ $(id -u) -eq 0 ]; then
                 useradd -m -p $pass $username
                 [ $? -eq 0 ] && echo "User has been added to system!" || echo "Failed to add a user!"
                 usermod -aG wheel $username
-#                usermod -aG tsmadmin $username
-#                usermod -aG tableau $username
+                usermod -aG tsmadmin $username
+                usermod -aG tableau $username
         fi
 else
         echo "Only root may add a user to the system"

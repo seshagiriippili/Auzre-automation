@@ -1,29 +1,21 @@
 ---
+
 - name: install tableau server
   become: yes
-  become_user: "{{ tsmadmin }}"
-  beocme_method: sudo
   yum:
     name: /tmp/tableau-server-10-5-0.x86_64.rpm
     state: present
-#  beocme_method: sudo
-#- name: create a new user
-#  become: yes
-#  command: './useradding.sh "{{ tsmadmin }}" "{{ tsmpasswd }}"'
-#  args:
-#    chdir: /tmp
 - name: initialise the TSM by accepting the licence 
   become: yes
-  become_user: "{{ tsmadmin }}"
-#  beocme_method: su
   command:  ./initialize-tsm --accepteula 
   args:
     chdir: /opt/tableau/tableau_server/packages/scripts.10500.18.0109.1050/
 
-- name: copy the configuration files to /tmp
-  template:
-    src: secrets.j2
-    dest: /tmp/secrets
+- name: create a new user
+  become: yes
+  command: './useradding.sh "{{ tsmadmin }}" "{{ tsmpasswd }}"'
+  args:
+    chdir: /tmp
 - name: copy the configuration files to /tmp
   template:
     src: reg_templ.json.j2
@@ -33,36 +25,3 @@
     src: config.json.j2
     dest: /tmp/config.json
 
-#- name: installing the tableau server
-#  become_user: "{{ tsmadmin }}" 
-#  command: 'sudo "{{ installer_path }}"/automated-installer -s /tmp/secrets -f /tmp/config.json -r /tmp/reg_templ.json  --accepteula /tmp/"{{ server_pkg }}"'
-
-#- name: Make sure we have a 'wheel' group
-#  become: yes
-#  group:
-#    name: "{{ item }}"
-#    state: present
-#  with_items:
-#    - wheel  
-#    - tableau  
-#    - tsmadmin  
-
-#
-##- name: Allow 'wheel' group to have passwordless sudo
-##  become: yes
-##  lineinfile:
-##    dest: /etc/sudoers
-##    state: present
-##    regexp: '^%wheel'
-##    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-##    validate: 'visudo -cf %s'
-
-#- name: Add sudoers users to tsmadmin  group
-#  become: yes
-#  user:
-#    name: "{{ tab_serv_adm_usr  }}"
-#    password: "{{ tab_serv_adm_pass }}"
-#    groups: wheel, tsmadmin, tableau 
-#    shell: /bin/bash
-#    state: present
-#

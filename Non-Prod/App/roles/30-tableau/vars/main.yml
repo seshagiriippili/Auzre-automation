@@ -8,10 +8,12 @@ repo: npdacapplicationpackages
 container: sampleapp
 url: https://npdacapplicationpackages.blob.core.windows.net
 tab_pkg: tableau-server-automated-installer-2018-3.noarch.rpm
-#server_pkg: tableau-server-10-5-0.x86_64.rpm
-server_pkg: tableau-server-2018-3-0.x86_64.rpm
+server_pkg: tableau-server-10-5-0.x86_64.rpm
+postgres_sql: tableau-postgresql-odbc-9.5.3-1.x86_64.rpm
+#server_pkg: tableau-server-2018-3-0.x86_64.rpm
 auto_installer: '{{ url }}/{{ container }}/{{ tab_pkg }}'
 tabl_server_pkg: '{{ url }}/{{ container }}/{{ server_pkg }}'
+postgresql: '{{ url }}/{{ container }}/{{ postgres_sql }}'
 tsmadmin: tadmin
 tsmpasswd: tbladmin123
 #tsmpasswd: '$6$/LSSI/mKt$AuhndmeQEPpHrd3dY/sjgLhd0bjAbNQj2FerGMBx97Gxsqi4kGQCqH7AEaDxl9aLOQ6Kxdzi7g621i7fQ.GiN.'
@@ -20,5 +22,5 @@ tsmpasswd: tbladmin123
 tab_serv_adm_usr: admin
 tab_serv_adm_pass: admin123
 #tab_serv_adm_pass: '$6$/LSSI/mKt$AuhndmeQEPpHrd3dY/sjgLhd0bjAbNQj2FerGMBx97Gxsqi4kGQCqH7AEaDxl9aLOQ6Kxdzi7g621i7fQ.GiN.'
-hostname: nptableau01.dac.nsw.gov.au
+#hostname: nptableau01.dac.nsw.gov.au
 installer_path: /opt/tableau/tableau_server_automated_installer/automated-installer.20183.18.1019.1426

@@ -1,17 +1,18 @@
 ---
 
 - name: add user tbladmin
- become: yes
+  become: yes
   user:
     name: "{{ tsmadmin }}" 
+    create_home: yes    
     state: present
 
 
 - name: Mount /dev/sdb1 to /opt
   become: yes
   shell: |
-    mount /dev/sdb1 /var/opt
-#    echo "{{tsmadmin}} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+    echo "{{tsmadmin}} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+#    mount /dev/sdb1 /var/opt
 
 - name: Set Hostname with hostname command
   become: yes
@@ -23,7 +24,7 @@
 
 - name: Re-gather facts
   action: setup
-  hen: ansible_hostname != fqdn
+  when: ansible_hostname != fqdn
 
 - name: Build hosts file (backups will be made)
   become: yes
@@ -40,9 +41,9 @@
     - restart systemd-logind
 
 
-#- name: Check that you can connect (GET) to a Azure Blob and download pkg
-#  become: true
-#  uri:
-#    url: "{{ tabl_server_pkg }}" 
-#    dest: /tmp
+- name: Check that you can connect (GET) to a Azure Blob and download pkg
+  become: true
+  uri:
+    url: "{{ tabl_server_pkg }}" 
+    dest: /tmp
 
