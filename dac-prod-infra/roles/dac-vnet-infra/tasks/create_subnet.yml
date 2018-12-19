@@ -1,0 +1,31 @@
+---
+ - name: Create a Subnet
+   azure_rm_subnet:
+     resource_group: "{{ resource_group_name }}" 
+     name: "{{ subnet_gateway }}"
+     address_prefix: "{{ gateway_cidr }}"
+     virtual_network: "{{ vnet_name }}"
+ - name: Create a Subnet
+   azure_rm_subnet:
+     resource_group: "{{ resource_group_name }}" 
+     name: "{{ subnet_mgmt }}"
+     address_prefix: "{{ mgmt_cidr }}"
+     virtual_network: "{{ vnet_name }}"
+ - name: Create a Subnet
+   azure_rm_subnet:
+     resource_group: "{{ resource_group_name }}" 
+     name: "{{ subnet_process }}"
+     address_prefix: "{{ process_cidr }}"
+     virtual_network: "{{ vnet_name }}"
+ - name: Create a Subnet
+   azure_rm_subnet:
+     resource_group: "{{ resource_group_name }}" 
+     name: "{{ subnet_present }}"
+     address_prefix: "{{ present_cidr }}"
+     virtual_network: "{{ vnet_name }}"
+ - name: Create a Subnet
+   azure_rm_subnet:
+     resource_group: "{{ resource_group_name }}" 
+     name: "{{ subnet_ingest }}"
+     address_prefix: "{{ingest_cidr }}"
+     virtual_network: "{{ vnet_name }}"

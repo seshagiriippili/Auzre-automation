@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  pre_tasks:
+    - name: preload task
+      pretask:
+        task: "prod VNET installation begins"
+
+  roles:
+    - dac-vnet-infra 
+
+  post_tasks:
+    - name: task ends
+      pretask:
+        task: "prod VNET installation completed"
+        state: absent

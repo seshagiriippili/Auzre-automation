@@ -1,0 +1,12 @@
+---
+# vars file for infra
+# subscription_id: NSWDAC_NONPROD
+ default_location: australiaeast
+ resource_group_name: dac-prod-rg 
+ vnet_name: dac-prod-vnet 
+ subnet_mgmt: dac-mgmt-subnet
+ subnet_process: dac-process-subnet
+ subnet_present: dac-present-subnet
+ subnet_gateway: dac-gateway-subnet
+ subnet_ingest: dac-ingest-subnet
+

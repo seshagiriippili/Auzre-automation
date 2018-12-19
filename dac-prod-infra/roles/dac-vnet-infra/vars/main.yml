@@ -1,0 +1,9 @@
+---
+# vars file for infra
+vnet_cidr: "10.71.0.0/16"
+gateway_cidr: "10.71.40.0/24"
+mgmt_cidr: "10.71.10.0/24"
+present_cidr: "10.71.50.0/24"
+process_cidr: "10.71.30.0/24"
+ingest_cidr: "10.71.20.0/24"
+
