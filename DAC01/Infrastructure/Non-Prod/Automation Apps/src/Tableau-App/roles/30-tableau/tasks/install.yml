@@ -1,0 +1,33 @@
+---
+- name: install tableau installer rpm from Azure Blob
+  become: yes
+  yum:
+    name: "{{ tabl_server_pkg }}"
+    state: present
+
+#- name: install tableau server
+#  become: yes
+#  yum:
+#    name: /tmp/tableau-server-10-5-0.x86_64.rpm
+#    state: present
+- name: initialise the TSM by accepting the licence 
+  become: yes
+  command:  ./initialize-tsm --accepteula 
+  args:
+    chdir: /opt/tableau/tableau_server/packages/scripts.20183.18.1019.1426/ 
+#    chdir: "{{ installer_path }}" 
+
+- name: create a new user
+  become: yes
+  command: './useradding.sh "{{ tsmadmin }}" "{{ tsmpasswd }}"'
+  args:
+    chdir: /tmp
+- name: copy the configuration files to /tmp
+  template:
+    src: reg_templ.json.j2
+    dest: /tmp/reg_templ.json
+- name: copy the configuration files to /tmp
+  template:
+    src: config.json.j2
+    dest: /tmp/config.json
+

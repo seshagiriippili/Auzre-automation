@@ -1,0 +1,13 @@
+---
+# vars file for ansible-controller
+#default_location: australiaeast
+resource_group_name: npdac-presentation-rg
+vnet_name: npdac-presentation-vnet
+tab_subnet: npdac-presentation-tab-subnet
+nsg_name: npdac-presentation-tab-nsg
+admin_user: azureuser
+vm_name: nptableau01 
+vm_size: Standard_DS13_v2
+my_nic: nptableauNIC
+public_ip_name: TableauPublicIP
+sshname: "{{ vm_name }}"

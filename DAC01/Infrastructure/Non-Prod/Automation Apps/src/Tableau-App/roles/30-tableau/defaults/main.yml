@@ -1,0 +1,4 @@
+---
+# defaults file for tableau
+hostname: "{{ ansible_hostname }}"
+fqdn: '{{ ansible_hostname }}.dac.nsw.gov.au'

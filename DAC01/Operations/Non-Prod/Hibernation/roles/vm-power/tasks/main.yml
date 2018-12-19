@@ -1,0 +1,6 @@
+---
+# tasks file for test
+- include: spin-up.yml
+  tags: poweron
+- include: spin-down.yml
+  tags: poweroff

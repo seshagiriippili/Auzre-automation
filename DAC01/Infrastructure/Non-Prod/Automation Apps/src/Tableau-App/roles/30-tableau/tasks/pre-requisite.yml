@@ -1,0 +1,61 @@
+---
+- name: creating a new user
+  become: yes
+  template:
+    src: useradding.sh.j2
+    dest: /tmp/useradding.sh
+    mode: '0755'
+
+- name: Mount up device by label
+  become: yes
+  mount:
+    path: /opt
+    src: /dev/sdb1
+    fstype: ext4
+    opts: defaults,nofail
+    state: mounted
+
+    
+#- name: Mount /dev/sdb1 to /opt and create user
+#  become: yes
+#  shell: |
+#    mount /dev/sdb1 /var/opt
+   
+
+- name: Set Hostname with hostname command
+  become: yes
+  hostname:
+    name: "{{ fqdn }}"
+#    name: "{{ hostname }}"
+  notify:
+    - restart hostname
+    - restart systemd-logind
+
+- name: Re-gather facts
+  action: setup
+  when: ansible_hostname != fqdn
+
+- name: Build hosts file (backups will be made)
+  become: yes
+  lineinfile:
+    dest: /etc/hosts
+    regexp: "^{{ ansible_default_ipv4.address }}"
+    line: "{{ ansible_default_ipv4.address }} {{ fqdn }} {{ hostname }}"
+    state: present
+    backup: yes
+  when: ansible_default_ipv4.address is defined
+  become: yes
+  notify:
+    - restart hostname
+    - restart systemd-logind
+
+
+#- name: Check that you can connect (GET) to a Azure Blob and download pkg
+#  become: true
+#  uri:
+#    url: "{{ item }}"
+#    dest: /tmp
+#  with_items:
+#    - "{{ tabl_server_pkg }}"
+#    - "{{ postgresql }}"
+

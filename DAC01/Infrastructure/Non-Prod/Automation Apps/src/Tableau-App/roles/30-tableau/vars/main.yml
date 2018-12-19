@@ -1,0 +1,28 @@
+---
+# vars file for tableau
+
+resource_group_name: npdac-presentation-rg
+
+#Blob details
+repo: npdacapplicationpackages
+container: sampleapp
+url: https://npdacapplicationpackages.blob.core.windows.net
+#tab_pkg: tableau-server-automated-installer-2018-3.noarch.rpm
+#server_pkg: tableau-server-10-5-0.x86_64.rpm
+server_pkg: tableau-server-2018-3-0.x86_64.rpm
+postgres_sql: tableau-postgresql-odbc-9.5.3-1.x86_64.rpm
+#server_pkg: tableau-server-2018-3-0.x86_64.rpm
+#auto_installer: '{{ url }}/{{ container }}/{{ tab_pkg }}'
+tabl_server_pkg: '{{ url }}/{{ container }}/{{ server_pkg }}'
+postgresql: '{{ url }}/{{ container }}/{{ postgres_sql }}'
+tsmadmin: tadmin
+tsmpasswd: tbladmin123
+#tsmpasswd: '$6$/LSSI/mKt$AuhndmeQEPpHrd3dY/sjgLhd0bjAbNQj2FerGMBx97Gxsqi4kGQCqH7AEaDxl9aLOQ6Kxdzi7g621i7fQ.GiN.'
+#tsmpasswd: $6$tbladmin123$/LOulRbdp0BEMqpaIiA01bKt1VX3XSAsg60H/OauFisCL6.tmmw3rlGgJPl15jDbGEAFRRMDmn2IoVIjDcHyj0
+
+tab_serv_adm_usr: admin
+tab_serv_adm_pass: admin123
+#tab_serv_adm_pass: '$6$/LSSI/mKt$AuhndmeQEPpHrd3dY/sjgLhd0bjAbNQj2FerGMBx97Gxsqi4kGQCqH7AEaDxl9aLOQ6Kxdzi7g621i7fQ.GiN.'
+#hostname: nptableau01.dac.nsw.gov.au
+#installer_path: /opt/tableau/tableau_server/packages/scripts.20183.18.1019.1426/ 
+installer_path: /opt/tableau/tableau_server/packages/scripts.20183.18.1019.1426 

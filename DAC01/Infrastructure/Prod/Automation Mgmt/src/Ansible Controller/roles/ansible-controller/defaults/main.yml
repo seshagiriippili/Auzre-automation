@@ -1,0 +1,11 @@
+---
+# ssh config settings
+sshkey: "/etc/keys/dac-prod-2018.key"
+sshname: AnsibleProd
+authkeys: "/home/{{admin_user}}/.ssh/authorized_keys"
+config: "/root/.ssh/config"
+#key_data: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDb+M3Y/ewlHjNWzc1ic50XIfMj5paSli/mUzpzIGdrbJuNqtxkR+d/K5n64B4zwlEaF3MexvnFVTQR8wQ2vjD+9n3yDRSGvRu8PtBzEg6eBAo6bRt8JgyWhdyKK2vr2L3kAtwJDgA55wZXbCfsENW0zLXMa8IT0MuJg5MMbdmH5Auu2WylUFMcTBuTbUm2vQntIrQIHdIVQzjiwKvUSLLshe9/RH/RIsjy27n2pezy+cS23m7d2QcgMWK5rjHTux3pgtaUyqpIwLplmqNX8RjeoFzPpyK9l7r6xk5/eo3z6Ijuv4UHQDHYtSgEGq1l7ARDOv06sP4mos9QGJHYh/kn root@np-dp-mysql-data-01.gs.local"
+marker: "Auto Ansible Server Ansible"
+key_data: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFazcIQA0H6dk77/NCQqr7CNWyCJf16Nx23HAAcNveMuLSV9SUbFCjB7X54xU49X+5uPsf53IPl8IEoibqu2SPSCnukQ3bmH404iiQ3OtXJDRbc6PW7gFBox9uV5URZ6JET5YkUgh6aZpIAHFpNZtumuYw1Mik2o4T5sKkCiZg10qyq2WNf3o5cGu/W4+Bi16zq1jgoPhaqu7ivPul8AaKBOxVdWpySBveZnGwtlDMFyU+CGgB/oDJ/9Dvr2vbLl74mKmfPyDrUxjVZa8UzcnNGf8wK5hyM4jOxvej4gYM/ysA3XOE6v/+1VYCXAsn3TxHw5xaRXIs7eRDBA0/mYxV root@ctrlVM"
+
+

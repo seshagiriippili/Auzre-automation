@@ -1,0 +1,9 @@
+---
+- name: Power On
+  azure_rm_virtualmachine:
+    resource_group: "{{item.rg}}"
+    name: "{{item.vm}}"
+    started: yes
+  with_items:
+    - "{{vms}}"
+

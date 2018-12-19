@@ -1,0 +1,5 @@
+---
+# defaults file for resource and virtual machines
+vms:
+  - { rg: 'npdac-presentation-rg', vm: 'npdmmysql01VM' }
+

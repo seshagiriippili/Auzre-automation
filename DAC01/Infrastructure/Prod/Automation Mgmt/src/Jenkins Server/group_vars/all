@@ -1,0 +1,43 @@
+---
+# vars file for ansible-jenkins server
+#default_location: australiaeast
+resource_group_name: dac-mgmt-rg
+vnet_name: dac-mgmt-vnet
+subnet_name: dac-mgmt-subnet
+nsg_name: dac-mgmt-nsg
+admin_user: azureuser
+vm_name: JenkinsProd
+my_nic: JenkinProdNIC
+public_ip_name: JenkinProdPublicIP
+
+# ssh config settings
+sshkey: "/etc/keys/dac-prod-2018.key"
+sshname: "{{vm_name}}"
+authkeys: "/home/{{admin_user}}/.ssh/authorized_keys"
+config: "/root/.ssh/config"
+key_data: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFazcIQA0H6dk77/NCQqr7CNWyCJf16Nx23HAAcNveMuLSV9SUbFCjB7X54xU49X+5uPsf53IPl8IEoibqu2SPSCnukQ3bmH404iiQ3OtXJDRbc6PW7gFBox9uV5URZ6JET5YkUgh6aZpIAHFpNZtumuYw1Mik2o4T5sKkCiZg10qyq2WNf3o5cGu/W4+Bi16zq1jgoPhaqu7ivPul8AaKBOxVdWpySBveZnGwtlDMFyU+CGgB/oDJ/9Dvr2vbLl74mKmfPyDrUxjVZa8UzcnNGf8wK5hyM4jOxvej4gYM/ysA3XOE6v/+1VYCXAsn3TxHw5xaRXIs7eRDBA0/mYxV root@ctrlVM"
+marker: "Auto {{sshname}} Server by Ansible"
+
+# application jenkins
+jenkins_home: /var/lib/jenkins
+jenkins_local: /opt/jenkins
+jenkins_user: default
+image: myjenkins
+password: foobar
+sock: /var/run/docker.sock
+docker: /usr/bin/docker
+sysconfig: /etc/sysconfig/docker
+dockerfile: Dockerfile
+uid: 1000
+port: 8080
+yum_packs:
+  - epel-release
+  - ansible
+  - python-pip
+pip_rm_packs:
+  - cryptography
+pip_packs:
+  - pyopenssl
+  - "ansible[azure]"
+azuredir: "/root/.azure"
+azurecredit: "credentials"

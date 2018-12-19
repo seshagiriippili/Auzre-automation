@@ -1,0 +1,11 @@
+---
+ - name: log into TSM as tadmin user
+   become_user: "{{ tsmadmin }}"
+   shell: |
+      tsm login -u "{{ tsmadmin }}" -p "{{ tsmpasswd }}"
+      tsm licenses activate -t
+      tsm register --file /tmp/reg_templ.json
+      tsm settings import -f /tmp/config.json 
+      tsm pending-changes apply -p "{{ tsmpasswd }}"
+      tsm initialize --start-server --request-timeout 1800
+      tabcmd initialuser --server 'localhost:80' --username '"{{ tsmadmin }}"' --password '"{{ tsmpasswd }}"'

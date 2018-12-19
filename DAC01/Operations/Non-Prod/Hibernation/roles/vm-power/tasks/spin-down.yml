@@ -1,0 +1,9 @@
+---  
+- name: Power Off
+  azure_rm_virtualmachine:
+    resource_group: "{{item.rg}}"
+    name: "{{item.vm}}"
+    started: no
+  with_items:
+    - "{{vms}}"
+
