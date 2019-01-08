@@ -1,0 +1,8 @@
+#!/bin/sh
+
+AS=`/etc/az/ts.py`
+echo "export AZURE_SECRET='$AS'"
+echo "export AZURE_CLIENT_ID=3b0947ad-132c-46fa-bdf5-158865e3e6cd"
+echo "export AZURE_SUBSCRIPTION_ID=7e3a186c-57f5-4b5c-b1d5-02f5ee54da94"
+echo "export AZURE_TENANT=5d7c290e-7a76-4d76-bd56-7b92a873f6be"
+

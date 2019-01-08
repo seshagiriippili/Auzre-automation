@@ -1,0 +1,5 @@
+echo "unset AZURE_CLIENT_ID"
+echo "unset AZURE_SECRET"
+echo "unset AZURE_SUBSCRIPTION_ID"
+echo "unset AZURE_TENANT"
+echo "unset _"

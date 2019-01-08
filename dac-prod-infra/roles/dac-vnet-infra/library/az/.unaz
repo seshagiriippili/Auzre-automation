@@ -1,0 +1,3 @@
+#!/bin/sh
+
+[ -f ~/.azure/credentials ] && rm ~/.azure/credentials

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+AS=`/etc/az/ts.py`
+
+echo $AS >> /tmp/foo.log
+
+cat > ~/.azure/credentials <<EOF
+[default]
+subscription_id=1e4d857b-9767-4d94-84cc-da027d4371c8
+# subscription_id=7e3a186c-57f5-4b5c-b1d5-02f5ee54da94
+client_id=3b0947ad-132c-46fa-bdf5-158865e3e6cd
+secret=$AS
+tenant=5d7c290e-7a76-4d76-bd56-7b92a873f6be
+EOF
